@@ -31,7 +31,8 @@ public class movbasica : MonoBehaviour
 
         rbPlayer.velocity = new Vector2(movimentoHorizontal * velocidade, rbPlayer.velocity.y);
 
-        if(movimentoHorizontal >0 && verificarDirecaoPersonagem == true){
+        if(movimentoHorizontal >0 && verificarDirecaoPersonagem == true)
+        {
             Flip();
         }
         if (movimentoHorizontal < 0 && verificarDirecaoPersonagem == false)
@@ -63,6 +64,8 @@ public class movbasica : MonoBehaviour
         verificarDirecaoPersonagem = !verificarDirecaoPersonagem;
         float x = transform.localScale.x * -1;
         transform.localScale = new Vector3(x, transform.localScale.y,transform.localScale.z);
+        velocidadeTiro *= -1;
+        municao.GetComponent<SpriteRenderer>().flipX = verificarDirecaoPersonagem;
     }
     public void Atirar()
     {
