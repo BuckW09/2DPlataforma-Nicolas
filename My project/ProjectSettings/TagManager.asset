@@ -3,12 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - municao
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - chao
   - Water
   - UI
   - 

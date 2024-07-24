@@ -17,6 +17,7 @@ public class movbasica : MonoBehaviour
     public GameObject municao;
     public Transform posicTiro;
     public float velocidadeTiro;
+    public LayerMask chao;
     void Start()
     {
         rbPlayer = GetComponent<Rigidbody2D>();
@@ -48,6 +49,8 @@ public class movbasica : MonoBehaviour
         if(Input.GetMouseButtonDown(0))
         {
             Atirar();
+            anim.SetTrigger("shoot");
+
         }
         anim.SetInteger("Run",(int)movimentoHorizontal);
         anim.SetBool("sensor",sensor);
@@ -56,7 +59,7 @@ public class movbasica : MonoBehaviour
 
     public void verificarChao()
     {
-        sensor = Physics2D.OverlapCircle(posicaoSensor.position, 0.15f);
+        sensor = Physics2D.OverlapCircle(posicaoSensor.position, 0.25f,chao);
     }
 
     public void Flip()
