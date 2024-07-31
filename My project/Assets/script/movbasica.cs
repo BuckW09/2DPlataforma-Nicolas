@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class movbasica : MonoBehaviour
 {
+  
+
     [Header("Conf Player")]
     public float velocidade;
     public float movimentoHorizontal;
@@ -14,14 +18,33 @@ public class movbasica : MonoBehaviour
 
     private Animator anim;
     public bool verificarDirecaoPersonagem;
+
+    [Header("Conf Tiro")]
     public GameObject municao;
     public Transform posicTiro;
     public float velocidadeTiro;
     public LayerMask chao;
+
+    [Header("Conf Vida")]
+    public int contadordevida;
+    public int vidaAtual;
+    public TextMeshProUGUI textVida;
+
+    [Header("Config Municao")]
+    public int municaoAtual= 5;
+    public TextMeshProUGUI textMunicao;
+
     void Start()
     {
         rbPlayer = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        vidaAtual = 10;
+        textVida.text = vidaAtual.ToString();
+
+        municaoAtual = 10;
+        textMunicao.text = municaoAtual.ToString();
+
+
     }
 
     // Update is called once per frame
@@ -54,6 +77,7 @@ public class movbasica : MonoBehaviour
         }
         anim.SetInteger("Run",(int)movimentoHorizontal);
         anim.SetBool("sensor",sensor);
+
     }
 
 
@@ -72,8 +96,46 @@ public class movbasica : MonoBehaviour
     }
     public void Atirar()
     {
-        GameObject temporario = Instantiate(municao);
-        temporario.transform.position = posicTiro.position;
-        temporario.GetComponent<Rigidbody2D>().velocity = new Vector2(velocidadeTiro, 0);
+        if(municaoAtual!= 0)
+        {
+            municaoAtual--;
+            textMunicao.text = municaoAtual.ToString();
+            GameObject temporario = Instantiate(municao);
+            temporario.transform.position = posicTiro.position;
+            temporario.GetComponent<Rigidbody2D>().velocity = new Vector2(velocidadeTiro, 0);
+        }
+        else
+        {
+            municaoAtual = 0;
+        }
+    }
+    
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        //ganha vida
+        if(collision.gameObject.tag == "vida")
+        {
+            contadordevida++;
+            vidaAtual = vidaAtual + contadordevida;
+            textVida.text = vidaAtual.ToString();
+            Destroy(collision.gameObject);
+        }
+        //perder vida
+        if(collision.gameObject.tag == "inimigo")
+        {
+            vidaAtual--;
+            textVida.text = vidaAtual.ToString();
+            Destroy(collision.gameObject);
+        }
+        if(collision.gameObject.tag == "recarregar")
+        {
+            municaoAtual = municaoAtual + 5;
+            textMunicao.text = municaoAtual.ToString();
+            Destroy(collision.gameObject);
+        }
+        if(collision.gameObject.tag == "mudarfase")
+        {
+            SceneManager.LoadScene("fase1");
+        }
     }
 }
