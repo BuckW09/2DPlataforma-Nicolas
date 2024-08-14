@@ -19,6 +19,10 @@ public class Botoes : MonoBehaviour
 
     public void IrJogar()
     {
-       //SceneManage
+        SceneManager.LoadScene(1);
     } 
+    public void Sair()
+    {
+        Application.Quit();
+    }
 }
