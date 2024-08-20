@@ -15,6 +15,7 @@ public class movbasica : MonoBehaviour
     public float forcaPulo;
     public Transform posicaoSensor;
     public bool sensor;
+    public Transform posiPlay;
 
     private Animator anim;
     public bool verificarDirecaoPersonagem;
@@ -50,6 +51,10 @@ public class movbasica : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (transform.position.x <= -20)
+        {
+            //tra
+        }
         verificarChao();
         movimentoHorizontal = Input.GetAxisRaw("Horizontal");
 
