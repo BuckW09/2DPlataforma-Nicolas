@@ -53,7 +53,7 @@ public class movbasica : MonoBehaviour
     {
         if (transform.position.x <= -20)
         {
-            //tra
+            transform.position = new Vector2(-19,transform.position.y);
         }
         verificarChao();
         movimentoHorizontal = Input.GetAxisRaw("Horizontal");

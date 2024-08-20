@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class inimigo1 : MonoBehaviour
 {
     // Start is called before the first frame update
-    public GameObject inimigo1;
     void Start()
     {
         
@@ -14,6 +13,6 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       Instantiate(inimigo1);
+        
     }
 }
