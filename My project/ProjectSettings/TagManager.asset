@@ -8,6 +8,7 @@ TagManager:
   - vida
   - recarregar
   - mudarFase
+  - inimigo1
   layers:
   - Default
   - TransparentFX

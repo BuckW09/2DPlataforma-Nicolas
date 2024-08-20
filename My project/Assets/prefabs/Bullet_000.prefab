@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1971821457257465031}
   - component: {fileID: 6950303764478621034}
   - component: {fileID: 7163865888718221191}
+  - component: {fileID: 3557612384728411024}
   m_Layer: 0
   m_Name: Bullet_000
   m_TagString: municao
@@ -78,7 +79,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 1262960572, guid: 2064654b72e69fd43a3b0bcbca0f3132, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1.72, y: 1.39}
@@ -180,3 +181,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.72, y: 1.39}
   m_EdgeRadius: 0
+--- !u!114 &3557612384728411024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3182455603560417205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86665427a120c8743a877ee16fc44f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

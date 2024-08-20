@@ -40,7 +40,7 @@ public class movbasica : MonoBehaviour
         rbPlayer = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         vidaAtual = 10;
-        textVida.text = vidaAtual.ToString();
+        
 
         municaoAtual = 10;
         textMunicao.text = municaoAtual.ToString();
@@ -51,6 +51,7 @@ public class movbasica : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        textVida.text = vidaAtual.ToString();
         if (transform.position.x <= -20)
         {
             transform.position = new Vector2(-19,transform.position.y);
@@ -126,21 +127,25 @@ public class movbasica : MonoBehaviour
             Destroy(collision.gameObject);
         }
         //perder vida
-        if(collision.gameObject.tag == "inimigo")
-        {
-            vidaAtual--;
-            textVida.text = vidaAtual.ToString();
-            Destroy(collision.gameObject);
-        }
+        
         if(collision.gameObject.tag == "recarregar")
         {
             municaoAtual = municaoAtual + 5;
             textMunicao.text = municaoAtual.ToString();
             Destroy(collision.gameObject);
         }
-        if(collision.gameObject.tag == "mudarfase")
+        if(collision.gameObject.tag == "mudarFase")
         {
             SceneManager.LoadScene("fase1");
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "inimigo1")
+        {
+            vidaAtual--;
+            textVida.text = vidaAtual.ToString();
+            Destroy(collision.gameObject);
         }
     }
 }
