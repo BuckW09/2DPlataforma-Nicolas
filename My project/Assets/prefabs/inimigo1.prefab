@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abbbc21d92a1e794092ea55a945114e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 2
+  Speed: 4
 --- !u!60 &430573229958012292
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -159,7 +159,8 @@ PolygonCollider2D:
       - {x: -0.14, y: -0.96}
       - {x: 0.29999998, y: -0.96}
       - {x: 0.5, y: -0.79999995}
-      - {x: 0.65999997, y: -0.56}
+      - {x: 0.64706063, y: -0.4991757}
+      - {x: 0.66399276, y: -0.44552946}
       - {x: 0.65999997, y: 0.12}
     - - {x: 0.06, y: -0.76}
       - {x: 0.06, y: -0.71999997}
@@ -217,7 +218,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: df42c4da985d2634d9ebed00cf6f664f, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
