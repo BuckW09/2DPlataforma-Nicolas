@@ -28,7 +28,11 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         temporizador = Time.time + tempoDelay;
-        StartCoroutine(timeIni2());
+
+        if (GameOver == false) 
+        {
+            StartCoroutine(timeIni2());
+        } 
     }
 
     // Update is called once per frame
@@ -47,13 +51,21 @@ public class GameManager : MonoBehaviour
 
     public void GeradorInimigo2()
     {
-        Instantiate(inimigo2, posSpawn1.position, Quaternion.identity);
+        if (GameOver == false) 
+        {
+            Instantiate(inimigo2, posSpawn1.position, Quaternion.identity);
+        } 
         
     }
 
     public void GeradorInimigo3()
     {
-        Instantiate(inimigo3, posSpawn2.position, Quaternion.identity);
+        if (GameOver == false) 
+        {
+            Instantiate(inimigo3, posSpawn2.position, Quaternion.identity);
+
+        }
+        
 
     }
 

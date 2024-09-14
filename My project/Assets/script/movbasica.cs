@@ -35,15 +35,24 @@ public class movbasica : MonoBehaviour
     public int municaoAtual= 5;
     public TextMeshProUGUI textMunicao;
 
+    private GameManager GM;
     void Start()
     {
+        GM = FindObjectOfType(typeof(GameManager))as GameManager;
+
         rbPlayer = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        vidaAtual = 10;
+        vidaAtual = 2;
         
 
         municaoAtual = 10;
         textMunicao.text = municaoAtual.ToString();
+
+        if (vidaAtual <= 0)
+        {
+            GM.GameOver = true;
+            
+        }
 
 
     }
@@ -51,38 +60,42 @@ public class movbasica : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        textVida.text = vidaAtual.ToString();
-        if (transform.position.x <= -20)
+        if(GM.GameOver == false)
         {
-            transform.position = new Vector2(-19,transform.position.y);
-        }
-        verificarChao();
-        movimentoHorizontal = Input.GetAxisRaw("Horizontal");
+            textVida.text = vidaAtual.ToString();
+            if (transform.position.x <= -20)
+            {
+                transform.position = new Vector2(-19, transform.position.y);
+            }
+            verificarChao();
+            movimentoHorizontal = Input.GetAxisRaw("Horizontal");
 
-        rbPlayer.velocity = new Vector2(movimentoHorizontal * velocidade, rbPlayer.velocity.y);
+            rbPlayer.velocity = new Vector2(movimentoHorizontal * velocidade, rbPlayer.velocity.y);
 
-        if(movimentoHorizontal >0 && verificarDirecaoPersonagem == true)
-        {
-            Flip();
-        }
-        if (movimentoHorizontal < 0 && verificarDirecaoPersonagem == false)
-        {
-            Flip();
-        }
+            if (movimentoHorizontal > 0 && verificarDirecaoPersonagem == true)
+            {
+                Flip();
+            }
+            if (movimentoHorizontal < 0 && verificarDirecaoPersonagem == false)
+            {
+                Flip();
+            }
 
 
-        if (Input.GetButtonDown("Jump") && sensor == true)
-        {
-            rbPlayer.AddForce(new Vector2(0, forcaPulo));
-        }
-        if(Input.GetMouseButtonDown(0))
-        {
-            Atirar();
-            anim.SetTrigger("shoot");
+            if (Input.GetButtonDown("Jump") && sensor == true)
+            {
+                rbPlayer.AddForce(new Vector2(0, forcaPulo));
+            }
+            if (Input.GetMouseButtonDown(0))
+            {
+                Atirar();
+                anim.SetTrigger("shoot");
 
+            }
+            anim.SetInteger("Run", (int)movimentoHorizontal);
+            anim.SetBool("sensor", sensor);
         }
-        anim.SetInteger("Run",(int)movimentoHorizontal);
-        anim.SetBool("sensor",sensor);
+       
 
     }
 
