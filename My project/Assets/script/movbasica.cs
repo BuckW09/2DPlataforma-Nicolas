@@ -36,6 +36,12 @@ public class movbasica : MonoBehaviour
     public TextMeshProUGUI textMunicao;
 
     private GameManager GM;
+
+    public GameObject PanelMorte;
+    public GameObject PanelPause;
+    public bool isPasused = false;
+
+
     void Start()
     {
         GM = FindObjectOfType(typeof(GameManager))as GameManager;
@@ -48,19 +54,19 @@ public class movbasica : MonoBehaviour
         municaoAtual = 10;
         textMunicao.text = municaoAtual.ToString();
 
-        if (vidaAtual <= 0)
-        {
-            GM.GameOver = true;
-            
-        }
-
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(GM.GameOver == false)
+        if (vidaAtual <= 0)
+        {
+            GM.GameOver = true;
+
+        }
+
+        if (GM.GameOver == false)
         {
             textVida.text = vidaAtual.ToString();
             if (transform.position.x <= -20)
@@ -81,7 +87,6 @@ public class movbasica : MonoBehaviour
                 Flip();
             }
 
-
             if (Input.GetButtonDown("Jump") && sensor == true)
             {
                 rbPlayer.AddForce(new Vector2(0, forcaPulo));
@@ -92,10 +97,35 @@ public class movbasica : MonoBehaviour
                 anim.SetTrigger("shoot");
 
             }
+
+            if (Input.GetKeyDown(KeyCode.P) || Input.GetMouseButton(0))
+            {
+                if(isPasused == true)
+                {
+                    Pausar();
+
+                }else if(isPasused == false) 
+                { 
+                    Resume();
+                }
+
+            }
+
+            
+
             anim.SetInteger("Run", (int)movimentoHorizontal);
             anim.SetBool("sensor", sensor);
         }
-       
+
+       if(GM.GameOver == true)
+        {
+            PanelMorte.SetActive(true);
+            Time.timeScale = 0; 
+
+        }else if(GM.GameOver == false)
+        {
+            Time.timeScale = 1;
+        }
 
     }
 
@@ -128,14 +158,27 @@ public class movbasica : MonoBehaviour
             municaoAtual = 0;
         }
     }
-    
+
+    public void Pausar() 
+    {
+        isPasused = true;
+        PanelPause.SetActive(true);
+        Time.timeScale = 0;
+    }
+
+    public void Resume()
+    {
+        isPasused = false;
+        PanelPause.SetActive(false);
+        Time.timeScale = 1;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //ganha vida
         if(collision.gameObject.tag == "vida")
         {
-            contadordevida++;
-            vidaAtual = vidaAtual + contadordevida;
+            vidaAtual++;
             textVida.text = vidaAtual.ToString();
             Destroy(collision.gameObject);
         }
